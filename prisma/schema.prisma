@@ -1,3 +1,5 @@
+// site is https://app.planetscale.com/jgy-98/commerce_database
+
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -17,11 +19,12 @@ model cetegories {
   name String
 }
 
-model products {
+model products { 
   id Int @id @default(autoincrement())
   name String
   image_url String?
   category_id Int
+  createdAt DateTime @default(now())
 
   @@index([category_id])
 }

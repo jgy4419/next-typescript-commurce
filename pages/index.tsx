@@ -4,12 +4,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Button from '@components/Button';
+import { css } from '@emotion/react';
 
 const Home: NextPage = () => {
   // useState 타입 정의
   // const [products, setProducts] = useState<{ id: string; properties: { id: string }[] }[]>([]);
 
-  const [products, setProducts] = useState<{ id: string; name: string }[]>([]);
+  const [products, setProducts] = useState<{ id: string; name: string; createdAt: string }[]>([]);
 
   // useEffect(() => {
   //   fetch('/api/get-items').then(res => res.json())
@@ -47,15 +48,23 @@ const Home: NextPage = () => {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
-        <input type="text" ref={ inputRef } placeholder="name"/>
+        <input className="mt-2 p-3 w-96 focus:border-red-500 focus:outline-none peer-invalid:visible text-pink-600 text-sm" type="text" ref={ inputRef } placeholder="name"/>
         
-        <button onClick={handleClick}>Add Jacket</button>
+        <button
+          css={css`
+            background-color: hotpink;
+            padding: 16px;
+            border-radius: 8px;
+          `}
+          onClick={handleClick}>Add Jacket</button>
+        
+        <Button onClick={handleClick}>Add Jacket2</Button>
 
         <div>
           <p>Produt List</p>
           {products && products.map((item) => {
             return(
-              <div key={item.id}>{item.name}</div>
+              <div key={item.id}>{item.name}<span>{ item.createdAt}</span></div>
             )
           })}
           {/* {

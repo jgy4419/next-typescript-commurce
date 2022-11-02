@@ -1,11 +1,19 @@
 import React from 'react';
-
-const Button = () => {
-    return (
-        <div>
-            Button
-        </div>
-    );
-};
+import styled from '@emotion/styled';
+// const Button = () => {
+//     return (
+//         <div>
+//             Button
+//         </div>
+//     );
+// };
  
-export default Button;
+// export default Button;
+
+const Button = styled.button`
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #eeeeee;
+`
+
+export default Button
