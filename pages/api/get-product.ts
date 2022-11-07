@@ -1,16 +1,18 @@
-// 여러 개를 다 가져옴
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function getProducts() {
+async function getProduct(id: number) {
   try {
-    const response = await prisma.products.findMany()
+      const response = await prisma.products.findUnique({
+          where: {
+            id: id,
+        }
+    })
       console.log(response);
       return response;
-  } catch (error) {
+  } catch (error) { 
     console.error(error);
   }
 }
@@ -24,8 +26,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+    const { id } = req.query;
+    if (id == null) {
+        res.status(400).json({ message: 'No id' })        
+    }
   try {
-    const products = await getProducts();
+    const products = await getProduct(Number(id));
     res.status(200).json({ items: products, message: 'Success' });
   } catch (error) {
     res.status(400).json({ message: `Failed` })

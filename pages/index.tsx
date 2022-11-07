@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   
   useEffect(() => {
     fetch('/api/get-products').then(res => res.json())
-      .then(data => setProducts(data.items));
+      .then(data => setProducts(data.items))
   }, []);
 
   const inputRef = useRef<HTMLInputElement>(null);
